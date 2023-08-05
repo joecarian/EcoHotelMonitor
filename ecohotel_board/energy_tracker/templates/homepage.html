@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+        {% if user.is_authenticated %}
+            {% for report in reports %}
+            <div class="card">
+                <div class="header">{{report.ecohotel.name}} <span>{{report.date}}</span></div>
+                <div class="body">
+                  <div class="skill">
+                    {% if report.energy_produced > report.energy_consumed %}
+                    <div class="skill-name">Energy Produced</div>
+                        <div class="skill-level">
+                        <div class="skill-percent" style="width: 90%"></div>
+                        </div>
+                        <div class="skill-percent-number">{{report.energy_produced}} Watt</div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Energy Consumed</div>
+                        <div class="skill-level">
+                        <div class="skill-percent" style="width: 80%"></div>
+                        </div>
+                        <div class="skill-percent-number">{{report.energy_consumed}} Watt</div>
+                    </div>
+                    {% else %}
+                    <div class="skill-name">Energy Produced</div>
+                        <div class="skill-level">
+                        <div class="skill-percent" style="width: 80%"></div>
+                        </div>
+                        <div class="skill-percent-number">{{report.energy_produced}} Watt</div>
+                    </div>
+                    <div class="skill">
+                        <div class="skill-name">Energy Consumed</div>
+                        <div class="skill-level">
+                        <div class="skill-percent" style="width: 90%"></div>
+                        </div>
+                        <div class="skill-percent-number">{{report.energy_consumed}} Watt</div>
+                    </div>
+                    {% endif %}
+                  <div class="skill">
+                    <div class="skill-name">Id Transaction</div>
+                    <div class="skill-level">
+                      <div class="skill-percent"></div>
+                    </div>
+                    <div class="skill-percent-number" style="width: 100%">{{report.hash}}</div>
+                  </div>
+                </div>
+              </div>
+                          
+                {% endfor %}          
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+        {% if user.is_authenticated %}
+            {% for hotel, info in hotels %}
+                    <div class="card-dashboard">
+                            <div class="header-dashboard">{{hotel.name}}</div>
+                            <div class="body-dashboard">
+                                <div class="skill-dashboard">
+                                    <div class="skill-name-dashboard">Total Energy Produced</div>
+                                    <div class="skill-percent-number-dashboard">{{info.total_produced}} Watt</div>
+                                </div>
+                                <div class="skill-dashboard">
+                                    <div class="skill-name-dashboard">Total Energy Consumed</div>
+                                    <div class="skill-percent-number-dashboard">{{info.total_consumed}} Watt</div>
+                                </div>
+                                {% if info.max_energy_prod_day %}
+                                    <div class="skill-dashboard">
+                                        <div class="skill-name-dashboard">Best Day: {{info.max_energy_prod_day}}</div>
+                                        <div class="skill-percent-number-dashboard">{{info.max_energy_prod}} Watt</div>
+                                    </div>
+                                {% endif %}   
+                                {% if info.max_energy_cons_day %}
+                                    <div class="skill-dashboard">
+                                        <div class="skill-name-dashboard">Worst Day: {{info.max_energy_cons_day}}</div>
+                                        <div class="skill-percent-number-dashboard">{{info.max_energy_cons}} Watt</div>
+                                    </div>
+                                {% endif %}   
+                            </div>
+                    
+                    </div>
+            {% endfor %}
+        {% endif %}
+{% endblock content %}
